@@ -8,6 +8,7 @@ import com.book.store.model.productmodel.Product;
 import com.book.store.model.usermodel.User;
 import com.book.store.repository.cartrepository.CartItemRepository;
 import com.book.store.repository.cartrepository.CartRepository;
+import com.book.store.repository.productrepository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
