@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class CartService {
+public class CartService implements CartServiceInterface {
     @Autowired
     private CartRepository cartRepository;
 
@@ -27,6 +27,7 @@ public class CartService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Override
     public CartDTO addCartItem(Long productId, Long userId) {
         // Fetch the cart for the user
         Cart cart = cartRepository.findByUserId(userId).orElseGet(() -> {
@@ -60,6 +61,7 @@ public class CartService {
         return convertToCartDTO(cart);
     }
 
+    @Override
     public CartDTO updateCartItemQuantity(Long cartItemId, Integer quantity) {
         // Fetch the cart item
         CartItem cartItem = cartItemRepository.findById(cartItemId)
@@ -73,6 +75,7 @@ public class CartService {
         return convertToCartDTO(cartItem.getCart());
     }
 
+    @Override
     public void removeCartItem(Long cartItemId) {
         // Fetch the cart item
         CartItem cartItem = cartItemRepository.findById(cartItemId)
@@ -82,6 +85,7 @@ public class CartService {
         cartItemRepository.delete(cartItem);
     }
 
+    @Override
     public CartDTO getCartItems(Long userId) {
         // Fetch the cart for the user
         Cart cart = cartRepository.findByUserId(userId)
@@ -99,5 +103,6 @@ public class CartService {
         return new CartDTO(cart.getId(), cart.getUser().getId(), cart.getCreatedAt(), cartItemDTOs);
     }
 }
+
 
 
