@@ -36,4 +36,11 @@ public class Feedback {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
+    public Feedback(User user, Product product, Integer rating, String comment, LocalDateTime createdAt) {
+        this.user = user;
+        this.product = product;
+        this.rating = rating;
+        this.comment = comment;
+        this.createdAt = createdAt;
+    }
 }
