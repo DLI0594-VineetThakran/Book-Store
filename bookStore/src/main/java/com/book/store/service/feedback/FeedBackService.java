@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class FeedBackService {
+public class FeedBackService implements FeedBackServiceImplementation {
     @Autowired
     private FeedBackRepository feedBackRepository;
 
@@ -23,14 +23,13 @@ public class FeedBackService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Override
     public String addFeedback(FeedBackSaveDTO feedBackSaveDTO){
         Optional<User> user =userRepository.findById(feedBackSaveDTO.getUserId());
-
-        
-        Product product=productRepository.findById(productRepository.getProductId());
+        Optional<Product> product=productRepository.findById(feedBackSaveDTO.getProductId());
         Feedback feedback=new Feedback(
                 user.orElse(null),
-                product,
+                product.orElse(null),
                 feedBackSaveDTO.getRating(),
                 feedBackSaveDTO.getComment(),
                 feedBackSaveDTO.getCreatedAt()
@@ -39,6 +38,7 @@ public class FeedBackService {
         return null;
     }
 
+    @Override
     public Feedback getFeedback(Long id) {
         return feedBackRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Feedback not found"));
