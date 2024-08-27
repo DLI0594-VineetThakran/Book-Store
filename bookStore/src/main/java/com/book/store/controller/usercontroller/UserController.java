@@ -33,7 +33,12 @@ public class UserController {
     }
 
     @PostMapping("/verification/{token}")
-    public boolean userVerification(@PathVariable String token){
-        userService.
+    public ResponseEntity<?> userVerification(@PathVariable String token) {
+        boolean isVerified = userService.verifyToken(token);
+        if (isVerified) {
+            return ResponseEntity.ok("User account verified successfully!");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid or expired token.");
+        }
     }
 }
