@@ -29,4 +29,8 @@ public class User {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
+    public User(Long id) {
+        this.id = id;
+    }
+
 }
