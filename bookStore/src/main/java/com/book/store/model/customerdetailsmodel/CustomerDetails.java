@@ -17,7 +17,7 @@ public class CustomerDetails {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false,referencedColumnName = "id")
     private User user;
 
     @Column(nullable = false)
@@ -31,4 +31,11 @@ public class CustomerDetails {
 
     private String phoneNumber;
 
+    public CustomerDetails(String phoneNumber, String address, String email, String name, User user) {
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.email = email;
+        this.name = name;
+        this.user = user;
+    }
 }

@@ -1,5 +1,6 @@
 package com.book.store.dto.customerdetailsdto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,9 +8,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerDetailsDTO {
+public class CustomerUpdateDTO {
     private Long id;
-    private Long userId;
+//    private Long userId;
     private String name;
     private String email;
     private String address;

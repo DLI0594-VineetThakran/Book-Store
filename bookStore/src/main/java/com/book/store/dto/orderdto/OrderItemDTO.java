@@ -10,8 +10,6 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderItemDTO {
-    private Long id;
-    private Long orderId;
     private Long productId;
     private Integer quantity;
     private BigDecimal price;

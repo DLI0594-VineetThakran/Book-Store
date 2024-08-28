@@ -1,6 +1,7 @@
 package com.book.store.service.customerdetailsservice;
 
 import com.book.store.dto.customerdetailsdto.CustomerDetailsDTO;
+import com.book.store.dto.customerdetailsdto.CustomerUpdateDTO;
 import com.book.store.model.customerdetailsmodel.CustomerDetails;
 import com.book.store.model.usermodel.User;
 import com.book.store.repository.customerdetailsrepository.CustomerDetailsRepository;
@@ -18,22 +19,21 @@ public class CustomerDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    public void addCustomer(CustomerDetailsDTO customerDetailsDTO){
+        User user=userRepository.getById(customerDetailsDTO.getUserId());
+        CustomerDetails customerDetails=new CustomerDetails(customerDetailsDTO.getPhoneNumber(),customerDetailsDTO.getAddress(), customerDetailsDTO.getEmail(), customerDetailsDTO.getName(),user
+        );
+        System.out.println(customerDetails);
+        customerDetailsRepository.save(customerDetails);
+    }
+
     @Transactional
-    public CustomerDetailsDTO updateCustomerDetails(CustomerDetailsDTO customerDetailsDTO) {
-        CustomerDetails customerDetails = customerDetailsRepository.findById(customerDetailsDTO.getId())
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
-
-        User user = userRepository.findById(customerDetailsDTO.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        customerDetails.setUser(user);
-        customerDetails.setName(customerDetailsDTO.getName());
-        customerDetails.setEmail(customerDetailsDTO.getEmail());
-        customerDetails.setAddress(customerDetailsDTO.getAddress());
-        customerDetails.setPhoneNumber(customerDetailsDTO.getPhoneNumber());
+    public void updateCustomerDetails(CustomerUpdateDTO customerUpdateDTO) {
+        CustomerDetails customerDetails=customerDetailsRepository.getById(customerUpdateDTO.getId());
+        customerDetails.setName(customerUpdateDTO.getName());
+        customerDetails.setAddress(customerUpdateDTO.getAddress());
+        customerDetails.setEmail(customerUpdateDTO.getEmail());
 
         customerDetailsRepository.save(customerDetails);
-
-        return customerDetailsDTO;
     }
 }
