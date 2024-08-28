@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CartService implements CartServiceInterface {
@@ -27,18 +28,10 @@ public class CartService implements CartServiceInterface {
     private ProductRepository productRepository;
 
 
-    @Override
-    public Cart createCart(Long userId) {
-        Cart cart = new Cart();
-        cart.setUserId(userId);
-        cart.setCreatedAt(LocalDateTime.now());
-        return cartRepository.save(cart);
-    }
-
     @Transactional
     @Override
     public ResponseEntity<String> addCartItem(Long productId, Long userid) {
-        Cart cart=cartRepository.findByUserId(userid);
+        Optional<Cart> cart=cartRepository.findByUserId(userid);
         Product productOpt = productRepository.findById(productId).orElse(null);
         if (productOpt==null) {
             return ResponseEntity.badRequest().body("Product not found");
@@ -52,8 +45,8 @@ public class CartService implements CartServiceInterface {
 
         CartItem cartItem = new CartItem();
         cartItem.setQuantity(1);
-        cartItem.setProduct(product);
-        cartItem.setCart(cart);
+        cartItem.setProductId(product.getId());
+        cartItem.setCart(cart.get());
         cartItemRepository.save(cartItem);
 
 

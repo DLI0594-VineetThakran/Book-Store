@@ -5,6 +5,7 @@ import com.book.store.dto.userdto.UserDTO;
 import com.book.store.jwtutil.userjwtutil.UserJwtUtil;
 import com.book.store.model.cartmodel.Cart;
 import com.book.store.model.usermodel.User;
+import com.book.store.repository.cartrepository.CartRepository;
 import com.book.store.repository.userrepository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +47,6 @@ public class UserService implements UserServiceI {
         cart.setUser(saveUser);
         cart.setCreatedAt(LocalDateTime.now());
         cartRepository.save(cart);
-
-        
     }
 
     @Override

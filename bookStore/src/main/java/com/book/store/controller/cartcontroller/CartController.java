@@ -16,16 +16,10 @@ public class CartController {
     @Autowired
     private CartService cartService;
 
-    @PostMapping("/create_cart")
-    public Cart createCart(@RequestParam Long userId){
-        return cartService.createCart(userId);
-    }
-
     @PostMapping("/add_cart_item/{product_id}")
-    public CartItem addItem(@RequestBody CartDto cartDto){
-        Long cartId = cartDto.getCartId();
-        Long productID = cartDto.getProductId();
-        return cartService.addCartItem(cartId, productID);
+    public ResponseEntity<String> addItem(@PathVariable("product_id") Long productId, @RequestBody CartDto cartDto){
+        Long userId = cartDto.getUserId();
+        return cartService.addCartItem(userId, productId);
     }
 
     @PutMapping("/cart_item_quantity/{cartItem_id}")
