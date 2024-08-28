@@ -10,34 +10,34 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity
-@Table(name = "Orders")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class Order {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Entity
+    @Table(name = "Orders")
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public class Order {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+        @ManyToOne
+        @JoinColumn(name = "user_id", nullable = false)
+        private User user;
 
-    @Column(nullable = false)
-    private BigDecimal totalAmount;
+        @Column(nullable = false)
+        private BigDecimal totalAmount;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private OrderStatus orderStatus;
+        @Enumerated(EnumType.STRING)
+        @Column(nullable = false)
+        private OrderStatus orderStatus;
 
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
+        @Column(nullable = false)
+        private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "order")
-    private List<OrderItem> orderItems;
+        @OneToMany(mappedBy = "order")
+        private List<OrderItem> orderItems;
 
-}
+    }
 
 
 
