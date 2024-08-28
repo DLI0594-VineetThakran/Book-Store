@@ -1,11 +1,16 @@
 package com.book.store.service.cartservice;
 
-import com.book.store.dto.cartdto.CartDTO;
+import com.book.store.model.cartmodel.Cart;
+import com.book.store.model.cartmodel.CartItem;
+import org.springframework.http.ResponseEntity;
+
+import java.util.List;
 
 public interface CartServiceInterface {
-    CartDTO addCartItem(Long productId, Long userId);
-    CartDTO updateCartItemQuantity(Long cartItemId, Integer quantity);
+    Cart createCart(Long userId);
+    ResponseEntity<String> addCartItem(Long productId, Long userid);
+    CartItem updateCartItemQuantity(Long cartItemId, Integer quantity);
     void removeCartItem(Long cartItemId);
-    CartDTO getCartItems(Long userId);
+    List<CartItem> getCartItems();
 }
 
