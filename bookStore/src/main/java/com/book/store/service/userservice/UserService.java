@@ -5,6 +5,7 @@ import com.book.store.dto.userdto.UserDTO;
 import com.book.store.jwtutil.userjwtutil.UserJwtUtil;
 import com.book.store.model.usermodel.User;
 import com.book.store.repository.userrepository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -51,13 +52,7 @@ public class UserService implements UserServiceI {
         }
     }
 
-//    public boolean verifyToken(String token) {
-//        UserDetails userdetails = userJwtUtil.extractUsername(token);
-//        String username = userJwtUtil.extractUsername(token);
-//        Optional<User> user =  userRepository.findByUsername(username);
-//        return user.isPresent() &&  userJwtUtil.validateToken(token, userdetails);
-//    }
-public boolean verifyToken(String token) {
+    public boolean verifyToken(String token) {
     String username = userJwtUtil.extractUsername(token);
     Optional<User> userOptional = userRepository.findByUsername(username);
 
@@ -67,6 +62,19 @@ public boolean verifyToken(String token) {
         return userJwtUtil.validateToken(token, userDetails);
     }
     return false;
-}
+   }
+
+//    @Transactional
+//    public UserDTO updateUser(UserDTO userDTO) {
+//        User user = userRepository.findByEmail(userDTO.getEmail())
+//                .orElseThrow(() -> new RuntimeException("User not found"));
+//        user.setUsername(userDTO.getUsername());
+//        user.setAddress(userDTO.getAddress());
+//        user.setPhoneNumber(userDTO.getPhoneNumber());
+//
+//        userRepository.save(user);
+//
+//        return userDTO;
+//    }
 
 }
