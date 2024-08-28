@@ -3,6 +3,7 @@ package com.book.store.service.userservice;
 import com.book.store.dto.userdto.LoginDTO;
 import com.book.store.dto.userdto.UserDTO;
 import com.book.store.jwtutil.userjwtutil.UserJwtUtil;
+import com.book.store.model.cartmodel.Cart;
 import com.book.store.model.usermodel.User;
 import com.book.store.repository.userrepository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -29,6 +30,9 @@ public class UserService implements UserServiceI {
     @Autowired
     private UserJwtUtil userJwtUtil;
 
+    @Autowired
+    private CartRepository cartRepository;
+
     @Override
     public void registerUser(UserDTO userDTO){
         User user = new User();
@@ -36,8 +40,14 @@ public class UserService implements UserServiceI {
         user.setEmail(userDTO.getEmail());
         user.setPassword(new BCryptPasswordEncoder().encode( userDTO.getPassword()));
         user.setCreatedAt(LocalDateTime.now());
+        User saveUser = userRepository.save(user);
 
-        userRepository.save(user);
+        Cart cart=new Cart();
+        cart.setUser(saveUser);
+        cart.setCreatedAt(LocalDateTime.now());
+        cartRepository.save(cart);
+
+        
     }
 
     @Override
