@@ -1,19 +1,20 @@
-package com.book.store.service.feedback;
+package com.book.store.service.feedbackservice;
 
-import com.book.store.dto.feedback.FeedBackSaveDTO;
+import com.book.store.dto.feedbackdto.FeedBackSaveDTO;
 import com.book.store.model.feedbackmodel.Feedback;
 import com.book.store.model.productmodel.Product;
 import com.book.store.model.usermodel.User;
-import com.book.store.repository.feedback.FeedBackRepository;
+import com.book.store.repository.feedbackrepository.FeedBackRepository;
 import com.book.store.repository.productrepository.ProductRepository;
 import com.book.store.repository.userrepository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
-public class FeedBackService implements FeedBackServiceImplementation {
+public class FeedBackService implements FeedBackServiceInterface {
     @Autowired
     private FeedBackRepository feedBackRepository;
 
@@ -39,9 +40,9 @@ public class FeedBackService implements FeedBackServiceImplementation {
     }
 
     @Override
-    public Feedback getFeedback(Long id) {
-        return feedBackRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Feedback not found"));
+    public List<Feedback> getAllFeedbacks(Long product_id) {
+        return feedBackRepository.findByProductId(product_id);
     }
+
 
 }

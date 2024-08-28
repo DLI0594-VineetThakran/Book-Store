@@ -26,6 +26,11 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(columnDefinition = "TEXT")
+    private String address;
+
+    private String phoneNumber;
+
     @Column(nullable = false)
     private LocalDateTime createdAt;
 }

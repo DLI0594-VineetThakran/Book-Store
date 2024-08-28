@@ -1,9 +1,6 @@
-package com.book.store.dto.feedback;
+package com.book.store.dto.feedbackdto;
 
 
-import com.book.store.model.productmodel.Product;
-import com.book.store.model.usermodel.User;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,10 +12,9 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FeedBackDTO {
-    private Long id;
-    private User user;
-    private Product product;
+public class FeedBackSaveDTO {
+    private Long userId;
+    private Long productId;
     private Integer rating;
     private String comment;
     private LocalDateTime createdAt;
