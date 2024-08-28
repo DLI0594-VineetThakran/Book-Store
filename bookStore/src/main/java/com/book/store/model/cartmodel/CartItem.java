@@ -1,6 +1,5 @@
 package com.book.store.model.cartmodel;
 
-import com.book.store.model.productmodel.Product;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
