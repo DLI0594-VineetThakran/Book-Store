@@ -47,8 +47,12 @@ public class WishlistService implements WishlistServiceInterface{
         return wishlist;
     }
 
-    public void removeProductFromWishlist(Long wishlistItemId) {
+    public String removeProductFromWishlist(Long wishlistItemId) {
+        System.out.println("Item Deleted!");
         wishlistItemRepository.deleteById(wishlistItemId);
+
+        return "Item Deleted!";
+
     }
 
     public List<WishlistItem> getAllWishlistItems(Long userId) {
