@@ -1,4 +1,4 @@
-package com.book.store.service.cartService;
+package com.book.store.service.cartservice;
 
 import com.book.store.model.cartmodel.Cart;
 import com.book.store.model.cartmodel.CartItem;
