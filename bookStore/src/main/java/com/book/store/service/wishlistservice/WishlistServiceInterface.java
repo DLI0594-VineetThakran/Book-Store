@@ -9,7 +9,7 @@ import java.util.Set;
 
 public interface WishlistServiceInterface {
     public Wishlist addItemToWishlist(Long userId, Long productId);
-    public void removeProductFromWishlist(Long wishlistItemId);
+    public String removeProductFromWishlist(Long wishlistItemId);
     public List<WishlistItem> getAllWishlistItems(Long userId);
 
 }

@@ -44,4 +44,10 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid or expired token.");
         }
     }
+
+//    @PutMapping("/edit_user")
+//    public ResponseEntity<UserDTO> updateCustomerDetails(@RequestBody UserDTO userUpdateDTO) {
+//        UserDTO updatedUserDetails = userService.updateUser(userUpdateDTO);
+//        return ResponseEntity.ok(updatedUserDetails);
+//    }
 }
