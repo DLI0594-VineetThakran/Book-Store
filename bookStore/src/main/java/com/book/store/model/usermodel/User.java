@@ -28,6 +28,15 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+<<<<<<< HEAD
+    @Column(columnDefinition = "TEXT")
+    private String address;
+
+    private String phoneNumber;
+
+    @Column(nullable = false)
+    private LocalDateTime createdAt;
+=======
     private LocalDateTime createdAt;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -38,4 +47,5 @@ public class User {
 
     public User(Long userId) {
     }
+>>>>>>> 350153b7f75ff75a8c7ce656a697cf11436c76b1
 }
