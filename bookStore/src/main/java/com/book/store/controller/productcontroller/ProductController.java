@@ -5,6 +5,7 @@ import com.book.store.service.productservice.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/bookstore_user")
 public class ProductController {

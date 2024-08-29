@@ -4,5 +4,10 @@ public enum OrderStatus {
     PENDING,
     SHIPPED,
     DELIVERED,
-    CANCELLED
+    CANCELLED;
+
+    @Override
+    public String toString() {
+        return "OrderStatus{}";
+    }
 }
