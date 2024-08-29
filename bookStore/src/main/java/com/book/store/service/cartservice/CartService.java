@@ -1,5 +1,6 @@
 package com.book.store.service.cartService;
 
+import com.book.store.exception.ResourceNotFoundException;
 import com.book.store.model.cartmodel.Cart;
 import com.book.store.model.cartmodel.CartItem;
 import com.book.store.model.productmodel.Product;
@@ -35,7 +36,7 @@ public class CartService implements CartServiceInterface{
             cart = cartRepository.save(cart);
         }
 
-        Product product = productRepository.findById(productId).orElseThrow(() -> new RuntimeException("Product not found"));
+        Product product = productRepository.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Product not found"));
         CartItem cartItem = new CartItem();
         cartItem.setCart(cart);
         cartItem.setProduct(product);
@@ -48,7 +49,7 @@ public class CartService implements CartServiceInterface{
 
     @Override
     public Cart updateCartItemQuantity(Long cartItemId, Integer quantity) {
-        CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow(() -> new RuntimeException("CartItem not found"));
+        CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow(() -> new ResourceNotFoundException("CartItem not found"));
         cartItem.setQuantity(quantity);
         cartItemRepository.save(cartItem);
         return cartItem.getCart();
@@ -65,6 +66,6 @@ public class CartService implements CartServiceInterface{
         if (cart != null) {
             return cart.getItems();
         }
-        throw new RuntimeException("Cart not found for user id: " + userId);
+        throw new ResourceNotFoundException("Cart not found for user id: " + userId);
     }
 }
