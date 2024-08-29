@@ -1,10 +1,9 @@
-package com.book.store.controller.feedback;
+package com.book.store.controller.feedbackcontroller;
 
 
-import com.book.store.dto.feedback.FeedBackDTO;
-import com.book.store.dto.feedback.FeedBackSaveDTO;
+import com.book.store.dto.feedbackdto.FeedBackSaveDTO;
 import com.book.store.model.feedbackmodel.Feedback;
-import com.book.store.service.feedback.FeedBackService;
+import com.book.store.service.feedbackservice.FeedBackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,8 +22,10 @@ public class FeedBackController {
         return "added feedback";
     }
 
+
     @GetMapping("/get/feedback/{product_id}")
-    public Feedback getFeedback(@PathVariable Long id){
-        return feedBackService.getFeedback(id);
+    public List<Feedback> getAllFeedbacks(@PathVariable Long product_id) {
+        return feedBackService.getAllFeedbacks(product_id);
     }
+
 }
