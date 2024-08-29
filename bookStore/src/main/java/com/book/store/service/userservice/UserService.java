@@ -75,12 +75,7 @@ public class UserService implements UserServiceI {
         }
     }
 
-//    public boolean verifyToken(String token) {
-//        UserDetails userdetails = userJwtUtil.extractUsername(token);
-//        String username = userJwtUtil.extractUsername(token);
-//        Optional<User> user =  userRepository.findByUsername(username);
-//        return user.isPresent() &&  userJwtUtil.validateToken(token, userdetails);
-//    }
+
 public boolean verifyToken(String token) {
     String username = userJwtUtil.extractUsername(token);
     Optional<User> userOptional = userRepository.findByUsername(username);

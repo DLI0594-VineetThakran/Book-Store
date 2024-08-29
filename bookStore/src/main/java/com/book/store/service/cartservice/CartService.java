@@ -1,4 +1,4 @@
-package com.book.store.service.cartService;
+package com.book.store.service.cartservice;
 
 import com.book.store.exception.ResourceNotFoundException;
 import com.book.store.model.cartmodel.Cart;
@@ -57,10 +57,8 @@ public class CartService implements CartServiceInterface{
 
     @Override
     public String removeProductFromCart(Long cartItemId) {
-
         cartItemRepository.deleteById(cartItemId);
-
-        return "Deleted successfully";
+        return "Item Deleted!";
     }
 
     @Override

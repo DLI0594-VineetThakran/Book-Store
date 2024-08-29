@@ -1,5 +1,6 @@
 package com.book.store.service.wishlistservice;
 
+import com.book.store.exception.ResourceNotFoundException;
 import com.book.store.model.productmodel.Product;
 import com.book.store.model.usermodel.User;
 import com.book.store.model.wishlistmodel.Wishlist;
@@ -37,7 +38,7 @@ public class WishlistService implements WishlistServiceInterface{
             wishlist.setCreatedAt(LocalDateTime.now());
             wishlist = wishlistRepository.save(wishlist);
         }
-        Product product = productRepository.findById(productId).orElseThrow(() -> new RuntimeException("Product not found"));
+        Product product = productRepository.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Product not found"));
         WishlistItem wishlistItem = new WishlistItem();
         wishlistItem.setWishlist(wishlist);
         wishlistItem.setProduct(product);
@@ -60,6 +61,6 @@ public class WishlistService implements WishlistServiceInterface{
         if (wishlist != null) {
             return wishlist.getItems();
         }
-        throw new RuntimeException("Wishlist not found for user id: " + userId);
+        throw new ResourceNotFoundException("Wishlist not found for user id: " + userId);
     }
 }
