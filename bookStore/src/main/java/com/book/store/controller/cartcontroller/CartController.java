@@ -30,9 +30,7 @@ public class CartController {
 
     @DeleteMapping("/remove/{cartItemId}")
     public String removeProductFromCart(@PathVariable Long cartItemId) {
-        cartService.removeProductFromCart(cartItemId);
-        return "deleted successfully";
-//        ResponseEntity.noContent().build();
+        return cartService.removeProductFromCart(cartItemId);
     }
 
     @GetMapping("/{userId}/cart-items")
