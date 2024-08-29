@@ -1,5 +1,6 @@
 package com.book.store.service.productservice;
 
+import com.book.store.exception.ResourceNotFoundException;
 import com.book.store.model.productmodel.Product;
 import com.book.store.repository.productrepository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,16 +31,17 @@ public class ProductService implements ProductServiceInterface {
             product.setId(id);
             return productRepository.save(product);
         } else {
-            throw new RuntimeException("Product not found with id " + id);
+            throw new ResourceNotFoundException("Product not found with id " + id);
         }
     }
 
     @Override
-    public void deleteProduct(Long id) {
+    public String deleteProduct(Long id) {
         if (productRepository.existsById(id)) {
             productRepository.deleteById(id);
+            return "Item deleted";
         } else {
-            throw new RuntimeException("Product not found with id " + id);
+            throw new ResourceNotFoundException("Product not found with id " + id);
         }
     }
 }

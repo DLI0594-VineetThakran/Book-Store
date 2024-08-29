@@ -29,4 +29,12 @@ public class WishlistItem {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
+    @Override
+    public String toString() {
+        return "WishlistItem{" +
+                "id=" + id +
+                ", wishlist=" + wishlist +
+                ", product=" + product +
+                '}';
+    }
 }
