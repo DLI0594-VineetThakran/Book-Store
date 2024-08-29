@@ -34,6 +34,7 @@ public class CartService implements CartServiceInterface{
             cart.setUser(new User(userId));
             cart.setCreatedAt(LocalDateTime.now());
             cart = cartRepository.save(cart);
+            
         }
 
         Product product = productRepository.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Product not found"));
