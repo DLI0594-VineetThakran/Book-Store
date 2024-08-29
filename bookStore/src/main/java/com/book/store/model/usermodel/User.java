@@ -1,5 +1,7 @@
 package com.book.store.model.usermodel;
 
+import com.book.store.model.cartmodel.Cart;
+import com.book.store.model.wishlistmodel.Wishlist;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,7 +28,14 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
     private LocalDateTime createdAt;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Wishlist wishlist;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Cart cart;
+
+    public User(Long userId) {
+    }
 }
