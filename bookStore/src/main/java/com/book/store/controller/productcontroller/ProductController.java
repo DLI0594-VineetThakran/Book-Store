@@ -23,7 +23,7 @@ public class ProductController {
         return productService.updateProduct(id,product);
     }
     @DeleteMapping("/admin/delete/book/{id}")
-    public void deleteProduct(@PathVariable Long id){
-        productService.deleteProduct(id);
+    public String deleteProduct(@PathVariable Long id){
+        return productService.deleteProduct(id);
     }
 }
