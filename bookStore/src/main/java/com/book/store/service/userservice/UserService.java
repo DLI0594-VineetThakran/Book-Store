@@ -1,18 +1,17 @@
 package com.book.store.service.userservice;
 
 import com.book.store.dto.userdto.LoginDTO;
-import com.book.store.dto.userdto.UserDTO;
 import com.book.store.jwtutil.userjwtutil.UserJwtUtil;
 import com.book.store.model.cartmodel.Cart;
 import com.book.store.model.usermodel.User;
+import com.book.store.model.wishlistmodel.Wishlist;
 import com.book.store.repository.cartrepository.CartRepository;
 import com.book.store.repository.userrepository.UserRepository;
-import jakarta.transaction.Transactional;
+import com.book.store.repository.wishlistrepository.WishlistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -32,21 +31,36 @@ public class UserService implements UserServiceI {
     private UserJwtUtil userJwtUtil;
 
     @Autowired
+    private WishlistRepository wishlistRepository;
+
+    @Autowired
     private CartRepository cartRepository;
 
     @Override
-    public void registerUser(UserDTO userDTO){
-        User user = new User();
-        user.setUsername(userDTO.getUsername());
-        user.setEmail(userDTO.getEmail());
-        user.setPassword(new BCryptPasswordEncoder().encode( userDTO.getPassword()));
+    public User registerUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setCreatedAt(LocalDateTime.now());
-        User saveUser = userRepository.save(user);
+        User registeredUser = userRepository.save(user);
 
-        Cart cart=new Cart();
-        cart.setUser(saveUser);
+        // Create a wishlist for the new user
+        Wishlist wishlist = new Wishlist();
+        wishlist.setUser(registeredUser);
+        wishlist.setCreatedAt(LocalDateTime.now());
+        wishlistRepository.save(wishlist);
+
+        // Create a cart for the new user
+        Cart cart = new Cart();
+        cart.setUser(registeredUser);
         cart.setCreatedAt(LocalDateTime.now());
         cartRepository.save(cart);
+
+        // Set the wishlist and cart to the user
+        registeredUser.setWishlist(wishlist);
+        registeredUser.setCart(cart);
+        userRepository.save(registeredUser);
+
+
+        return registeredUser;
     }
 
     @Override
@@ -61,7 +75,13 @@ public class UserService implements UserServiceI {
         }
     }
 
-    public boolean verifyToken(String token) {
+//    public boolean verifyToken(String token) {
+//        UserDetails userdetails = userJwtUtil.extractUsername(token);
+//        String username = userJwtUtil.extractUsername(token);
+//        Optional<User> user =  userRepository.findByUsername(username);
+//        return user.isPresent() &&  userJwtUtil.validateToken(token, userdetails);
+//    }
+public boolean verifyToken(String token) {
     String username = userJwtUtil.extractUsername(token);
     Optional<User> userOptional = userRepository.findByUsername(username);
 
@@ -71,19 +91,6 @@ public class UserService implements UserServiceI {
         return userJwtUtil.validateToken(token, userDetails);
     }
     return false;
-   }
-
-//    @Transactional
-//    public UserDTO updateUser(UserDTO userDTO) {
-//        User user = userRepository.findByEmail(userDTO.getEmail())
-//                .orElseThrow(() -> new RuntimeException("User not found"));
-//        user.setUsername(userDTO.getUsername());
-//        user.setAddress(userDTO.getAddress());
-//        user.setPhoneNumber(userDTO.getPhoneNumber());
-//
-//        userRepository.save(user);
-//
-//        return userDTO;
-//    }
+}
 
 }
