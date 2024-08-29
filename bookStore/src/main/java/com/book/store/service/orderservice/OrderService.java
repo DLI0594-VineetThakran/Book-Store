@@ -35,35 +35,6 @@ public class OrderService implements OrderServiceInterface{
     @Autowired
     private UserRepository userRepository;
 
-//    @Override
-//    public Order placeOrder(Long userId, String paymentDetails, String shippingDetails) {
-//        Cart cart = cartRepository.findByUserId(userId);
-//        Order order = new Order();
-//        order.setUser(cart.getUser());
-//        order.setTotalAmount(cart.getItems().stream()
-//                .map(item -> item.getProduct().getPrice().multiply(BigDecimal.valueOf(item.getQuantity())))
-//                .reduce(BigDecimal.ZERO, BigDecimal::add));
-//        order.setOrderStatus(OrderStatus.PENDING);
-//        order.setCreatedAt(LocalDateTime.now());
-//
-//        List<OrderItem> orderItems = cart.getItems().stream().map(cartItem -> {
-//            OrderItem orderItem = new OrderItem();
-//            orderItem.setOrder(order);
-//            orderItem.setProduct(cartItem.getProduct());
-//            orderItem.setQuantity(cartItem.getQuantity());
-//            orderItem.setPrice(cartItem.getProduct().getPrice());
-//            return orderItem;
-//        }).collect(Collectors.toList());
-//
-//        order.setItems(orderItems);
-//        orderRepository.save(order);
-//        orderItemRepository.saveAll(orderItems);
-//
-//        // Clear the cart
-//        cartItemRepository.deleteAll(cart.getItems());
-//
-//        return order;
-//    }
 
     @Override
     public Order placeOrder(Long userId ) {
