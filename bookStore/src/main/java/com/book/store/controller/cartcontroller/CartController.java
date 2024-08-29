@@ -29,9 +29,9 @@ public class CartController {
     }
 
     @DeleteMapping("/remove/{cartItemId}")
-    public ResponseEntity<Void> removeProductFromCart(@PathVariable Long cartItemId) {
-        cartService.removeProductFromCart(cartItemId);
-        return ResponseEntity.noContent().build();
+    public String removeProductFromCart(@PathVariable Long cartItemId) {
+        return cartService.removeProductFromCart(cartItemId);
+//        ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{userId}/cart-items")
