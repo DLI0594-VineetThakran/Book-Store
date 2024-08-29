@@ -55,8 +55,11 @@ public class CartService implements CartServiceInterface{
     }
 
     @Override
-    public void removeProductFromCart(Long cartItemId) {
+    public String removeProductFromCart(Long cartItemId) {
+
         cartItemRepository.deleteById(cartItemId);
+
+        return "Deleted successfully";
     }
 
     @Override
