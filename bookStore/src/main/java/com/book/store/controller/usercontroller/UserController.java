@@ -45,9 +45,4 @@ public class UserController {
         }
     }
 
-//    @PutMapping("/edit_user")
-//    public ResponseEntity<UserDTO> updateCustomerDetails(@RequestBody UserDTO userUpdateDTO) {
-//        UserDTO updatedUserDetails = userService.updateUser(userUpdateDTO);
-//        return ResponseEntity.ok(updatedUserDetails);
-//    }
 }
