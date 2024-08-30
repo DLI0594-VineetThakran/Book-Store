@@ -8,6 +8,7 @@ import com.book.store.dto.userdto.UserDTO;
 import com.book.store.model.usermodel.User;
 import com.book.store.service.adminservice.AdminService;
 import com.book.store.service.userservice.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class UserController {
     private UserService  userService;
 
     @PostMapping("/registration")
-    public ResponseEntity<?> registerUser(@RequestBody User userDTO){
+    public ResponseEntity<?> registerUser(@Valid @RequestBody User userDTO){
          userService.registerUser(userDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body("User account created successfully!");
     }

@@ -3,6 +3,7 @@ package com.book.store.controller.admincontroller;
 import com.book.store.dto.admindto.AdminDto;
 import com.book.store.dto.admindto.LoginDto;
 import com.book.store.service.adminservice.AdminService;
+import jakarta.validation.Valid;
 import org.aspectj.weaver.patterns.IToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,7 @@ public class AdminController {
     private AdminService adminService;
 
     @PostMapping("/registration")
-    public ResponseEntity<?> registerAdmin(@RequestBody AdminDto adminDto){
+    public ResponseEntity<?> registerAdmin(@Valid @RequestBody AdminDto adminDto){
         adminService.registerAdmin(adminDto);
         return ResponseEntity.status(HttpStatus.CREATED).body("Admin account created successfully!");
     }

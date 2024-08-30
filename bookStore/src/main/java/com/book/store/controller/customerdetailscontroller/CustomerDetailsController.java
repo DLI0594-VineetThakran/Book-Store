@@ -3,6 +3,7 @@ package com.book.store.controller.customerdetailscontroller;
 import com.book.store.dto.customerdetailsdto.CustomerDetailsDTO;
 import com.book.store.dto.customerdetailsdto.CustomerUpdateDTO;
 import com.book.store.service.customerdetailsservice.CustomerDetailsService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ public class CustomerDetailsController {
     private CustomerDetailsService customerDetailsService;
 
     @PostMapping("/add_customer")
-    public ResponseEntity<?> addCustomer(@RequestBody CustomerDetailsDTO customerDetailsDTO){
+    public ResponseEntity<?> addCustomer(@Valid @RequestBody CustomerDetailsDTO customerDetailsDTO){
         customerDetailsService.addCustomer(customerDetailsDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body("Customer added successfully!");
     }

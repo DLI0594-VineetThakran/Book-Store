@@ -3,6 +3,8 @@ package com.book.store.model.feedbackmodel;
 import com.book.store.model.productmodel.Product;
 import com.book.store.model.usermodel.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,6 +32,8 @@ public class Feedback {
     private Product product;
 
     @Column(nullable = false)
+    @NotNull(message = "Rating is mandatory")
+    @Max(value = 5, message = "Rating should not exceed 5")
     private Integer rating;
 
     @Column(columnDefinition = "TEXT")
