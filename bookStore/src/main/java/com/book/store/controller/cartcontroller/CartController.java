@@ -2,7 +2,7 @@ package com.book.store.controller.cartcontroller;
 
 import com.book.store.model.cartmodel.Cart;
 import com.book.store.model.cartmodel.CartItem;
-import com.book.store.service.cartService.CartService;
+import com.book.store.service.cartservice.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
