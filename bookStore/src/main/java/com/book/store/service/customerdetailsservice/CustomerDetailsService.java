@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomerDetailsService {
+public class CustomerDetailsService implements CustomerDetailsServiceInterface {
 
     @Autowired
     private CustomerDetailsRepository customerDetailsRepository;
@@ -19,6 +19,7 @@ public class CustomerDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    @Override
     public void addCustomer(CustomerDetailsDTO customerDetailsDTO){
         User user=userRepository.getById(customerDetailsDTO.getUserId());
         CustomerDetails customerDetails=new CustomerDetails(customerDetailsDTO.getPhoneNumber(),customerDetailsDTO.getAddress(), customerDetailsDTO.getEmail(), customerDetailsDTO.getName(),user
@@ -27,6 +28,7 @@ public class CustomerDetailsService {
         customerDetailsRepository.save(customerDetails);
     }
 
+    @Override
     @Transactional
     public void updateCustomerDetails(CustomerUpdateDTO customerUpdateDTO) {
         CustomerDetails customerDetails=customerDetailsRepository.getById(customerUpdateDTO.getId());
