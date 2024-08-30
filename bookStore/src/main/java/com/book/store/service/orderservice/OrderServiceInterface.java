@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface OrderServiceInterface {
     public List<Order> getOrderHistory(Long userId);
-    public Order placeOrder(Long userId );
+    public Order placeOrder(Long userId, Long productId, int quantity);
 }

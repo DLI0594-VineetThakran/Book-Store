@@ -34,29 +34,33 @@ public class CartService implements CartServiceInterface{
     @Override
     public Cart addProductToCart(Long userId, Long productId, Integer quantity) {
 
-        if (userRepository.existsById(userId)) {
-            throw new UserAlreadyExistsException("User ID is already registered");
-        }
-        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("user id is not registered"));
+        // Fetch the user from the database
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User Not Found!"));
 
+        // Fetch the cart associated with the user
         Cart cart = cartRepository.findByUserId(userId);
         if (cart == null) {
             cart = new Cart();
-            cart.setUser(new User(userId));
+            cart.setUser(user); // Set the managed User entity
             cart.setCreatedAt(LocalDateTime.now());
             cart = cartRepository.save(cart);
         }
 
-        Product product = productRepository.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+        // Fetch the product from the database
+        Product product = productRepository.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Product Not Found!"));
+
+        // Create a new CartItem and associate it with the cart and product
         CartItem cartItem = new CartItem();
         cartItem.setCart(cart);
         cartItem.setProduct(product);
         cartItem.setQuantity(quantity);
         cart.getItems().add(cartItem);
 
+        // Save the cart with the new item
         cartRepository.save(cart);
         return cart;
     }
+
 
     @Override
     public Cart updateCartItemQuantity(Long cartItemId, Integer quantity) {
@@ -68,9 +72,14 @@ public class CartService implements CartServiceInterface{
 
     @Override
     public String removeProductFromCart(Long cartItemId) {
+        if (!cartItemRepository.existsById(cartItemId)) {
+            return "Item not found!";
+        }
+
         cartItemRepository.deleteById(cartItemId);
         return "Item Deleted!";
     }
+
 
     @Override
     public List<CartItem> getAllCartItems(Long userId) {

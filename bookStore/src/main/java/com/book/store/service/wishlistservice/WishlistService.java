@@ -28,32 +28,49 @@ public class WishlistService implements WishlistServiceInterface{
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Transactional
     public Wishlist addItemToWishlist(Long userId, Long productId) {
+        // Fetch the user from the database
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+        // Fetch the wishlist for the user
         Wishlist wishlist = wishlistRepository.findByUserId(userId);
-        User user = new User();
         if (wishlist == null) {
             wishlist = new Wishlist();
-            wishlist.setUser(new User(userId));
+            wishlist.setUser(user); // Set the fetched user
             wishlist.setCreatedAt(LocalDateTime.now());
             wishlist = wishlistRepository.save(wishlist);
         }
+
+        // Fetch the product from the database
         Product product = productRepository.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+
+        // Create and add the wishlist item
         WishlistItem wishlistItem = new WishlistItem();
         wishlistItem.setWishlist(wishlist);
         wishlistItem.setProduct(product);
         wishlist.getItems().add(wishlistItem);
 
+        // Save the wishlist
         wishlistRepository.save(wishlist);
         return wishlist;
     }
 
+
+    @Transactional
     public String removeProductFromWishlist(Long wishlistItemId) {
-        System.out.println("Item Deleted!");
+        // Check if the item exists
+        if (!wishlistItemRepository.existsById(wishlistItemId)) {
+            throw new ResourceNotFoundException("Wishlist item not found");
+        }
+
+        // Delete the item
         wishlistItemRepository.deleteById(wishlistItemId);
 
         return "Item Deleted!";
-
     }
 
     public List<WishlistItem> getAllWishlistItems(Long userId) {
