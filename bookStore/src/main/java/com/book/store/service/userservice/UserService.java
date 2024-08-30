@@ -42,7 +42,7 @@ public class UserService implements UserServiceI {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setCreatedAt(LocalDateTime.now());
         String userName=user.getUsername();
-        if(userRepository.findByUsername(userName)!=null){
+        if(userRepository.findByUsername(userName).isPresent()){
             throw new CustomException("User with this User name already exists!!");
         }
         User registeredUser = userRepository.save(user);
