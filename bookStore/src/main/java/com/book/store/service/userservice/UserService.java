@@ -1,6 +1,7 @@
 package com.book.store.service.userservice;
 
 import com.book.store.dto.userdto.LoginDTO;
+import com.book.store.exception.CustomException;
 import com.book.store.jwtutil.userjwtutil.UserJwtUtil;
 import com.book.store.model.cartmodel.Cart;
 import com.book.store.model.usermodel.User;
@@ -40,6 +41,10 @@ public class UserService implements UserServiceI {
     public User registerUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setCreatedAt(LocalDateTime.now());
+        String userName=user.getUsername();
+        if(userRepository.findByUsername(userName)!=null){
+            throw new CustomException("User with this User name already exists!!");
+        }
         User registeredUser = userRepository.save(user);
 
         // Create a wishlist for the new user
