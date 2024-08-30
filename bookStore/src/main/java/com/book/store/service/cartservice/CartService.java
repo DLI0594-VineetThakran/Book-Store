@@ -1,6 +1,7 @@
 package com.book.store.service.cartservice;
 
 import com.book.store.exception.ResourceNotFoundException;
+import com.book.store.exception.UserAlreadyExistsException;
 import com.book.store.model.cartmodel.Cart;
 import com.book.store.model.cartmodel.CartItem;
 import com.book.store.model.productmodel.Product;
@@ -8,6 +9,7 @@ import com.book.store.model.usermodel.User;
 import com.book.store.repository.cartrepository.CartItemRepository;
 import com.book.store.repository.cartrepository.CartRepository;
 import com.book.store.repository.productrepository.ProductRepository;
+import com.book.store.repository.userrepository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +28,17 @@ public class CartService implements CartServiceInterface{
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Override
     public Cart addProductToCart(Long userId, Long productId, Integer quantity) {
+
+        if (userRepository.existsById(userId)) {
+            throw new UserAlreadyExistsException("User ID is already registered");
+        }
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("user id is not registered"));
+
         Cart cart = cartRepository.findByUserId(userId);
         if (cart == null) {
             cart = new Cart();
