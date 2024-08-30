@@ -25,17 +25,6 @@ public class SecurityConfig {
         return http.build();
     }
 
-
-
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .csrf(AbstractHttpConfigurer::disable) // Updated way to disable CSRF
-//                .authorizeHttpRequests(authorize -> authorize
-//                        .requestMatchers("/api/users/register", "/api/users/login").permitAll()
-//                        .anyRequest().authenticated()
-//                );
-//    }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
