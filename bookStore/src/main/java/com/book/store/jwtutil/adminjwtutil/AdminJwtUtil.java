@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Component
 public class AdminJwtUtil {
-    private final String SECRET_KEY = "1234";
+    private final String SECRET_KEY = "1234";   
 
     public String generateToken(String username){
         return Jwts.builder()

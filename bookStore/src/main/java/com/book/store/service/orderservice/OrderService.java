@@ -20,7 +20,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class OrderService implements OrderServiceInterface{
@@ -45,9 +44,9 @@ public class OrderService implements OrderServiceInterface{
 
     @Override
     public Order placeOrder(Long userId, Long productId, int quantity) {
-        User user = userRepository.getById(userId);
+        User user = userRepository.findById(userId).orElse(null);
         System.out.println("user " + user);
-        Product product = productRepository.getById(productId);
+        Product product = productRepository.findById(productId).orElse(null);
         System.out.println("product " + product);
 
         Cart cart = cartRepository.findByUserId(userId);
