@@ -1,6 +1,5 @@
 package com.book.store.model.wishlistmodel;
 
-import com.book.store.model.productmodel.Product;
 import com.book.store.model.usermodel.User;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -13,10 +12,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "Wishlist")

@@ -10,8 +10,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.Objects;
-
 @Entity
 @Table(name = "CartItem")
 @Data
