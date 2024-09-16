@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/bookstore_user")
 public class ProductController {
     @Autowired
-    private ProductService productService;
+    ProductService productService;
     @PostMapping("/admin/add/book")
     public Product addProduct(@RequestBody Product product){
         return productService.addProduct(product);

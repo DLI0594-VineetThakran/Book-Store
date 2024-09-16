@@ -19,16 +19,16 @@ import java.util.List;
 @Service
 public class WishlistService implements WishlistServiceInterface{
     @Autowired
-    private WishlistRepository wishlistRepository;
+    WishlistRepository wishlistRepository;
 
     @Autowired
-    private WishlistItemRepository wishlistItemRepository;
+    WishlistItemRepository wishlistItemRepository;
 
     @Autowired
-    private ProductRepository productRepository;
+    ProductRepository productRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
     @Transactional
     public Wishlist addItemToWishlist(Long userId, Long productId) {

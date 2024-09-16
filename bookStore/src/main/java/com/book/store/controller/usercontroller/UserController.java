@@ -22,7 +22,7 @@ import java.util.Collections;
 
 public class UserController {
     @Autowired
-    private UserService  userService;
+    UserService  userService;
 
     @PostMapping("/registration")
     public ResponseEntity<?> registerUser(@Valid @RequestBody User userDTO){

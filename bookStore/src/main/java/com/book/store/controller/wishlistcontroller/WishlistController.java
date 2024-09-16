@@ -16,7 +16,7 @@ import java.util.Set;
 @RequestMapping("/bookstore_user")
 public class WishlistController {
     @Autowired
-    private WishlistService wishlistService;
+    WishlistService wishlistService;
 
     @PostMapping("/add_wish_list_item/{product_id}")
     public ResponseEntity<Wishlist> addProductToWishlist(@RequestParam Long userId, @PathVariable Long product_id) {

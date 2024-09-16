@@ -24,22 +24,22 @@ import java.util.List;
 @Service
 public class OrderService implements OrderServiceInterface{
     @Autowired
-    private OrderRepository orderRepository;
+    OrderRepository orderRepository;
 
     @Autowired
-    private CartRepository cartRepository;
+    CartRepository cartRepository;
 
     @Autowired
-    private CartItemRepository cartItemRepository;
+    CartItemRepository cartItemRepository;
 
     @Autowired
-    private OrderItemRepository orderItemRepository;
+    OrderItemRepository orderItemRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
     @Autowired
-    private ProductRepository productRepository;
+    ProductRepository productRepository;
 
 
     @Override

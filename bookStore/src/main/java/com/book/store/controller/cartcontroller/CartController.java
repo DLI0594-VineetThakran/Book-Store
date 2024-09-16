@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/bookstore_user")
 public class CartController {
     @Autowired
-    private CartService cartService;
+    CartService cartService;
 
     @PostMapping("/add_cart_item/{product_id}")
     public ResponseEntity<Cart> addProductToCart(@PathVariable Long product_id, @RequestParam Long userId,  @RequestParam Integer quantity) {

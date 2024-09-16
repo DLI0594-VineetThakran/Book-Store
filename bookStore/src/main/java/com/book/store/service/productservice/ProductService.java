@@ -13,7 +13,7 @@ import java.util.Optional;
 public class ProductService implements ProductServiceInterface {
 
     @Autowired
-    private ProductRepository productRepository;
+    ProductRepository productRepository;
 
     @Override
     public Product addProduct(Product product) {

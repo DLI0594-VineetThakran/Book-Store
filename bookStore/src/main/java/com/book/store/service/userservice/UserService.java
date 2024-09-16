@@ -23,19 +23,19 @@ import java.util.Optional;
 @Service
 public class UserService implements UserServiceI {
     @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    PasswordEncoder passwordEncoder;
 
     @Autowired
-    private UserJwtUtil userJwtUtil;
+    UserJwtUtil userJwtUtil;
 
     @Autowired
-    private WishlistRepository wishlistRepository;
+    WishlistRepository wishlistRepository;
 
     @Autowired
-    private CartRepository cartRepository;
+    CartRepository cartRepository;
 
     @Override
     public User registerUser(User user) {

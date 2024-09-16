@@ -17,13 +17,13 @@ import java.util.Optional;
 @Service
 public class FeedBackService implements FeedBackServiceInterface {
     @Autowired
-    private FeedBackRepository feedBackRepository;
+    FeedBackRepository feedBackRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
     @Autowired
-    private ProductRepository productRepository;
+    ProductRepository productRepository;
 
     public String addFeedback(FeedBackSaveDTO feedBackSaveDTO) {
         Optional<User> user = userRepository.findById(feedBackSaveDTO.getUserId());

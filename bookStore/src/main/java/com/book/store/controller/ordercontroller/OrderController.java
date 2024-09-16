@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/bookstore_user")
 public class OrderController {
     @Autowired
-    private OrderService orderService;
+    OrderService orderService;
 
     @PostMapping("/add/order")
     public ResponseEntity<Order> placeOrder(@RequestParam Long userId, @RequestParam Long productId, @RequestParam int quantity) {

@@ -14,10 +14,10 @@ import org.springframework.stereotype.Service;
 public class CustomerDetailsService implements CustomerDetailsServiceInterface {
 
     @Autowired
-    private CustomerDetailsRepository customerDetailsRepository;
+    CustomerDetailsRepository customerDetailsRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
     @Override
     public void addCustomer(CustomerDetailsDTO customerDetailsDTO){

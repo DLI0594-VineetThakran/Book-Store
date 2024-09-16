@@ -19,7 +19,7 @@ import java.util.Collections;
 @RequestMapping("/bookstore_user/admin")
 public class AdminController {
     @Autowired
-    private AdminService adminService;
+    AdminService adminService;
 
     @PostMapping("/registration")
     public ResponseEntity<?> registerAdmin(@Valid @RequestBody AdminDto adminDto){

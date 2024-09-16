@@ -20,16 +20,16 @@ import java.util.List;
 public class CartService implements CartServiceInterface{
 
     @Autowired
-    private CartRepository cartRepository;
+    CartRepository cartRepository;
 
     @Autowired
-    private CartItemRepository cartItemRepository;
+    CartItemRepository cartItemRepository;
 
     @Autowired
-    private ProductRepository productRepository;
+    ProductRepository productRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
     @Override
     public Cart addProductToCart(Long userId, Long productId, Integer quantity) {
