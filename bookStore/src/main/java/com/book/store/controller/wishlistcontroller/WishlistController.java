@@ -1,7 +1,5 @@
 package com.book.store.controller.wishlistcontroller;
 
-import com.book.store.dto.wishlistdto.WishlistDto;
-import com.book.store.model.productmodel.Product;
 import com.book.store.model.wishlistmodel.Wishlist;
 import com.book.store.model.wishlistmodel.WishlistItem;
 import com.book.store.service.wishlistservice.WishlistService;
@@ -10,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/bookstore_user")
