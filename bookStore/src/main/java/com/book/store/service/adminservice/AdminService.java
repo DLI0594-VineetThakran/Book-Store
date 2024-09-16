@@ -17,13 +17,13 @@ import java.time.LocalDateTime;
 @Service
 public class AdminService implements AdminServiceInterface {
     @Autowired
-    private AdminRepository adminRepository;
+    AdminRepository adminRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    PasswordEncoder passwordEncoder;
 
     @Autowired
-    private AdminJwtUtil adminJwtUtil;
+    AdminJwtUtil adminJwtUtil;
 
     public void registerAdmin(AdminDto adminDto){
         Admin admin = new Admin();
