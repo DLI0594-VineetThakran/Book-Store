@@ -20,7 +20,6 @@ public class ProductService implements ProductServiceInterface {
         product.setCreatedAt(LocalDateTime.now());
         product.setUpdatedAt(LocalDateTime.now());
         product.setDeleted(false);
-        productRepository.save(product);
         return productRepository.save(product);
     }
 
@@ -61,9 +60,6 @@ public class ProductService implements ProductServiceInterface {
             throw new ResourceNotFoundException("Product not found with id " + id);
         }
     }
-
-
-
 
     @Override
     public String deleteProduct(Long id) {
