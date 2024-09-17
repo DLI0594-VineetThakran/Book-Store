@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CustomerUpdateDTO {
     private Long id;
-//    private Long userId;
     private String name;
     private String email;
     private String address;
