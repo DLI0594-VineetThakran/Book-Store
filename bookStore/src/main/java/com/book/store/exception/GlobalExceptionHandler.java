@@ -29,7 +29,8 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleGlobalException(Exception ex, WebRequest request) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    @ExceptionHandler(NoHandlerFoundException.class)public ResponseEntity<?> handleNoHandlerFoundException(NoHandlerFoundException ex) {
+    @ExceptionHandler(NoHandlerFoundException.class)
+    public ResponseEntity<?> handleNoHandlerFoundException(NoHandlerFoundException ex) {
         ErrorDetails errorDetails = new ErrorDetails(new Date(), "Path not found", ex.getRequestURL());
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
